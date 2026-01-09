@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Therapist - セラピストの働き方と専門知識を統合した知識プラットフォーム">
+    <title>Advanced Therapist Knowledge Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Advanced Therapist</h1>
+                    <p class="tagline">知識プラットフォーム</p>
+                </div>
+                <nav class="nav">
+                    <button class="nav-btn active" data-view="episodes">エピソード</button>
+                    <button class="nav-btn" data-view="graph">知識グラフ</button>
+                    <button class="nav-btn" data-view="bookmarks">ブックマーク</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">セラピストの未来を探求する</h2>
+                <p class="hero-description">
+                    理学療法士の働き方、専門知識、キャリア開発に関する42のエピソードから、
+                    あなたの実践に役立つ知見を見つけましょう。
+                </p>
+                <div class="search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="キーワードで検索（例: メンタルヘルス、起業、評価）"
+                        autocomplete="off"
+                    >
+                    <button id="clearSearch" class="clear-btn" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Episodes View -->
+            <div id="episodesView" class="view active">
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label class="filter-label">テーマで絞り込み</label>
+                        <div id="themeFilters" class="theme-filters"></div>
+                    </div>
+                    <div class="filter-stats">
+                        <span id="resultCount" class="result-count">42エピソード</span>
+                        <button id="clearFilters" class="clear-filters-btn" style="display: none;">
+                            フィルターをクリア
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Episodes Grid -->
+                <div id="episodesGrid" class="episodes-grid">
+                    <!-- Episodes will be dynamically inserted here -->
+                </div>
+
+                <!-- No Results -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+                        <path d="M32 20v16M32 44v.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <h3>該当するエピソードが見つかりませんでした</h3>
+                    <p>別のキーワードやフィルターをお試しください</p>
+                </div>
+            </div>
+
+            <!-- Knowledge Graph View -->
+            <div id="graphView" class="view">
+                <div class="graph-container">
+                    <div class="graph-controls">
+                        <button id="resetGraph" class="graph-btn">リセット</button>
+                        <button id="fitGraph" class="graph-btn">全体表示</button>
+                    </div>
+                    <div id="knowledgeGraph" class="knowledge-graph"></div>
+                    <div class="graph-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: var(--primary-color);"></div>
+                            <span>エピソード</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line"></div>
+                            <span>関連性（共通テーマ）</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookmarks View -->
+            <div id="bookmarksView" class="view">
+                <div class="bookmarks-header">
+                    <h2>ブックマーク</h2>
+                    <div class="bookmarks-actions">
+                        <button id="exportBookmarks" class="btn-secondary">エクスポート</button>
+                        <button id="clearBookmarks" class="btn-danger">すべて削除</button>
+                    </div>
+                </div>
+                <div id="bookmarksList" class="episodes-grid">
+                    <!-- Bookmarked episodes will be shown here -->
+                </div>
+                <div id="noBookmarks" class="no-results">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <path d="M16 8h32v48L32 44 16 56V8z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <h3>ブックマークがありません</h3>
+                    <p>エピソードカードの★アイコンをクリックして保存できます</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="閉じる">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <div class="episode-badge" id="modalBadge"></div>
+                    <h2 id="modalTitle" class="modal-title"></h2>
+                    <button id="modalBookmark" class="bookmark-btn" aria-label="ブックマーク">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 5h14v16l-7-4-7 4V5z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-meta">
+                    <div id="modalThemes" class="modal-themes"></div>
+                </div>
+                <div id="modalSummary" class="modal-summary"></div>
+                <div id="modalSections" class="modal-sections"></div>
+                <div id="modalRelated" class="modal-related"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Advanced Therapist. All rights reserved.</p>
+            <p class="footer-note">音声配信コンテンツの文字起こしを基に構築されています</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <script src="https://unpkg.com/vis-network@9.1.6/dist/vis-network.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
