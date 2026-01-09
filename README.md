@@ -70,4 +70,5 @@ node data-processor.js
 
 ## 開発者
 
-田代 祐人 (Yuto Tashiro)
+田代 雄斗 (Yuto Tashiro)
+安藤 祐介 (Yusuke Ando)
